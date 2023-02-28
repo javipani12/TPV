@@ -17,6 +17,10 @@ public class Reloj extends Thread {
         this.ventanaProductos = ventanaProductos;
     }
     
+    /**
+     * Calcula la hora y la muestra en la label correspondiente a través de un bucle
+     * que se ejecuta cada segundo
+     */
     @Override
     public void run(){
         while(true){

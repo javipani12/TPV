@@ -68,6 +68,7 @@ public class VentanaVenta extends javax.swing.JDialog {
         jLabelHora = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("TPV Venta");
 
         jButtonRealizarVenta.setText("REALIZAR VENTA");
         jButtonRealizarVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -154,12 +155,13 @@ public class VentanaVenta extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabelFecha)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(jLabelVendedor)))
+                        .addComponent(jLabelVendedor))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabelFecha)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -278,6 +280,9 @@ public class VentanaVenta extends javax.swing.JDialog {
     private javax.swing.JTextArea jTextAreaDesglose;
     // End of variables declaration//GEN-END:variables
     
+    /**
+     * Añade los productos y sus unidades al text area para que el usuario los visualice
+     */
     public void mostrarProductos(){
         for (int i = 0; i < venta.getProductos().size(); i++) {
             jTextAreaDesglose.append(venta.getProductos().obtenerProductoPorPosicion(i).getNombre()+" x");
@@ -285,6 +290,9 @@ public class VentanaVenta extends javax.swing.JDialog {
        }
     }
     
+    /**
+     * Muestra la fecha y la hora del momento en que se empieza a generar la venta
+     */
     public void mostrarFechaHora(){
         LocalDateTime fechaHora = LocalDateTime.now();
         int anno = fechaHora.getYear();

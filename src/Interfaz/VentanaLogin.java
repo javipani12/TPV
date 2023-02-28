@@ -62,6 +62,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         jPanelUsuarios = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TPV Login");
 
         jPanelNumeros.setLayout(new java.awt.GridBagLayout());
 
