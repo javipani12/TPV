@@ -189,7 +189,7 @@ public class VentanaProductos extends javax.swing.JFrame {
         });
         jPanelDatosVenta.add(jButtonSumar10);
 
-        jButtonGenerarInforme.setText("Generar Informe");
+        jButtonGenerarInforme.setText("Generar Informe Ventas Usuario");
         jButtonGenerarInforme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonGenerarInformeActionPerformed(evt);
@@ -302,7 +302,7 @@ public class VentanaProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGenerarVentaActionPerformed
 
     private void jButtonGenerarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarInformeActionPerformed
-        this.informe = new Informe();
+        this.informe = new Informe(venta.getUsuario().getIdUsuario());
     }//GEN-LAST:event_jButtonGenerarInformeActionPerformed
 
     private void jButtonDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeshacerActionPerformed

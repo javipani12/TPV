@@ -1,10 +1,11 @@
 package Informe;
 
-import Interfaz.VentanaInforme;
+import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
+import javax.swing.JFrame;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.swing.*;
 
@@ -14,38 +15,50 @@ import net.sf.jasperreports.swing.*;
  */
 public class Informe {
     
-    //Impresión del informe
-    JasperPrint jp = null;
-    //El visor del informe
-    JRViewer viewer;
-    //Ruta de la plantilla del reporte
-    String ficheroReporte = "src/informes/Usuarios.jrxml";
-    //Parametros Map
-    HashMap<String, Object> parameterMap = new HashMap<String, Object>();
-    //conexión con la BD
-    Connection conexion;
-
-    public Informe() {
-        try {
-            // Indicamos el driver utilizado para la conexión
+    public Informe(int idUsuario) {
+        
+        String HOST = "localhost";
+        String BD = "tpv";
+        String USUARIO = "usuario";
+        String PASSWORD = "usuario";
+        //Conectarnos a la base de datos
+        try{
+            //Cargamos driver mysql
             Class.forName("com.mysql.cj.jdbc.Driver");
-            // Inicializamos la cadena de conexion
-            this.conexion = DriverManager.getConnection( "jdbc:mysql://localhost/tpv?serverTimezone=UTC", "usuario", "usuario" );
-            //Compilamos el fichero de reporte
-            JasperReport reporteCompilado = JasperCompileManager.compileReport(ficheroReporte);
-            //Establecemos los parametros del reporte
-            parameterMap.put("SUBREPORT_DIR", "src/informes/");
-            //Rellenamos el reporte con los parametros,
-            jp = JasperFillManager.fillReport(reporteCompilado, parameterMap,conexion);
-            viewer = new JRViewer(jp);
             
-            VentanaInforme ventana = new VentanaInforme();
-            ventana.add(viewer);
-            ventana.validate();
-            ventana.setVisible(true);
+            //declaramos el objeto conexion
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://"+HOST+"/"+BD+"?serverTimezone=UTC",USUARIO, PASSWORD);
             
-        } catch (ClassNotFoundException | SQLException | JRException ex) {
-            System.out.println(ex.getMessage());
+            //Ruta del informe
+            String reportName = "src\\informes\\InformeVentas.jrxml";
+            
+            //Llamada a jasperReport
+            JasperReport jrcm = JasperCompileManager.compileReport(reportName);
+            
+            //Creamos un hashmap para pasar los parametros del informe
+            HashMap<String, Object> parametros = new HashMap<>();
+            
+            //Rellenar los parametros para pasarlos al informe
+            parametros.put("idUsuario", idUsuario);
+            
+            //Rellenar los parametros en el informe
+            JasperPrint jp = JasperFillManager.fillReport(jrcm, parametros, conexion);
+            JRViewer visor = new JRViewer(jp);
+            
+            //Creamos un frame o ventana
+            JFrame jf = new JFrame();
+            //Añadir el visor al jframe
+            jf.getContentPane().add(visor);
+            jf.validate();
+            //Tamaño de ventana
+            jf.setSize(new Dimension(800,600));
+            //Posicion de la pantalla
+            jf.setLocation(300, 100);
+            //Hacer visible la ventana
+            jf.setVisible(true);
+            
+        }catch(ClassNotFoundException | SQLException | JRException ex){
+            System.out.println("Error " + ex.getMessage()); 
         }
     }
 }
