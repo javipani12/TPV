@@ -136,22 +136,8 @@
 					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["Ventas_Usuarios.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"Ventas_Usuarios.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch">
-			<textField>
-				<reportElement x="355" y="15" width="100" height="30" uuid="f4d3d708-54f9-45c4-88ac-5307581b4a04"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement x="455" y="15" width="100" height="30" uuid="77d70a5b-9843-4796-b395-434985a24a51"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-		</band>
-	</columnFooter>
 </jasperReport>

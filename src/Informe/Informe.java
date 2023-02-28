@@ -1,6 +1,6 @@
 package Informe;
 
-import Interfaz.VentanaProductos;
+import Interfaz.VentanaInforme;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -19,18 +19,13 @@ public class Informe {
     //El visor del informe
     JRViewer viewer;
     //Ruta de la plantilla del reporte
-    String ficheroReporte = "src\\informes\\Usuarios.jrxml";
+    String ficheroReporte = "src/informes/Usuarios.jrxml";
     //Parametros Map
     HashMap<String, Object> parameterMap = new HashMap<String, Object>();
     //conexión con la BD
     Connection conexion;
-    VentanaProductos ventana;
 
-    public Informe(VentanaProductos ventana) {
-        this.ventana = ventana;
-    }
-    
-    public void generarInforme(){
+    public Informe() {
         try {
             // Indicamos el driver utilizado para la conexión
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -39,15 +34,18 @@ public class Informe {
             //Compilamos el fichero de reporte
             JasperReport reporteCompilado = JasperCompileManager.compileReport(ficheroReporte);
             //Establecemos los parametros del reporte
-            parameterMap.put("SUBREPORT_DIR", "src\\informes\\");
+            parameterMap.put("SUBREPORT_DIR", "src/informes/");
             //Rellenamos el reporte con los parametros,
             jp = JasperFillManager.fillReport(reporteCompilado, parameterMap,conexion);
+            viewer = new JRViewer(jp);
+            
+            VentanaInforme ventana = new VentanaInforme();
+            ventana.add(viewer);
+            ventana.validate();
+            ventana.setVisible(true);
+            
         } catch (ClassNotFoundException | SQLException | JRException ex) {
-            System.out.println(ex);
+            System.out.println(ex.getMessage());
         }
-        
-        viewer = new JRViewer(jp);
-        this.ventana.add(viewer);
-        this.ventana.revalidate();
     }
 }

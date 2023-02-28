@@ -38,7 +38,7 @@ public class VentanaProductos extends javax.swing.JFrame {
         conexion = new GestionBD("localhost", "usuario",
                 "usuario", "tpv"
         );
-        this.informe = new Informe(this);
+        
         this.listaAccionesProductos = new ArrayList();
         this.listaAccionesUnidades = new ArrayList();
         this.listaBotonesProductos = new ArrayList();
@@ -302,7 +302,7 @@ public class VentanaProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGenerarVentaActionPerformed
 
     private void jButtonGenerarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarInformeActionPerformed
-        informe.generarInforme();
+        this.informe = new Informe();
     }//GEN-LAST:event_jButtonGenerarInformeActionPerformed
 
     private void jButtonDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeshacerActionPerformed
