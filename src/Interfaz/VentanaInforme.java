@@ -28,6 +28,8 @@ public class VentanaInforme extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
 
+        jPanel1.setMinimumSize(new java.awt.Dimension(100, 100));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
